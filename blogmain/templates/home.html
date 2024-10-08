@@ -1,0 +1,11 @@
+{% extends "base.html"%}
+{% block content%}
+{% for p in post%}
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ p.title }}</h5>
+      <a href="#" class="btn btn-primary">read more</a>
+    </div>
+  </div>
+{% endfor %}
+{% endblock%}
