@@ -3,10 +3,25 @@
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <div class="alert alert-success" role="alert"{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-        {{message}}
+    <div  role="alert"{% if message.success %} class="alert alert-success" {%else%} class="alert alert-danger" {% endif %}>
+        {{messages}}
       </div>
     {% endfor %}
 </ul>
 {% endif %}
+<form method="post" action="{%url 'login'%}"> {% csrf_token %}
+    <div class="mb-3">
+        <label for="usernameInput" class="form-label">Username</label>
+        <input name="username" type="text" class="form-control" id="usernameInput" aria-describedby="usernameHelp" required>
+        <div id="usernameHelp" class="form-text">Choose a unique username.</div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input name="password" type="password" class="form-control" id="exampleInputPassword1" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign In</button>
+    <p>Don't have an account?</p>
+    <a href="{%url 'register'%}">sign up</a>
+</form>
+
 {% endblock%}
