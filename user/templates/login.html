@@ -3,8 +3,8 @@
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <div  role="alert"{% if message.success %} class="alert alert-success" {%else%} class="alert alert-danger" {% endif %}>
-        {{messages}}
+    <div  role="alert"{% if messages.success %} class="alert alert-success" {%else%} class="alert alert-danger" {% endif %}>
+        {{message}}
       </div>
     {% endfor %}
 </ul>
@@ -13,7 +13,6 @@
     <div class="mb-3">
         <label for="usernameInput" class="form-label">Username</label>
         <input name="username" type="text" class="form-control" id="usernameInput" aria-describedby="usernameHelp" required>
-        <div id="usernameHelp" class="form-text">Choose a unique username.</div>
     </div>
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
