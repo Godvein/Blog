@@ -1,20 +1,27 @@
-{% extends "base.html"%}
-{% block content%}
-<ul class="messages">
-  {% for message in messages %}
-  <div  role="alert" class="alert alert-success">
-      {{message}}
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <ul class="messages">
+        {% for message in messages %}
+        <div role="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </ul>
+    
+    <div class="row">
+        {% for p in post %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ p.title }}</h5>
+                    <p class="card-text">by {{ p.user.username }}</p>
+                    <p class="card-text text-muted">{{ p.date_created }}</p>
+                    <a href="#" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-  {% endfor %}
-</ul>
-{% for p in post%}
-
-<div class="card">
-    <div class="card-body">
-      <h5 class="card-title">{{ p.title }}</h5>
-      <p>{{p.date_created}}</p>
-      <a href="#" >read more</a>
-    </div>
-  </div>
-{% endfor %}
-{% endblock%}
+</div>
+{% endblock %}
