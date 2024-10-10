@@ -1,0 +1,13 @@
+{% extends "base.html"%}
+{% block content %}
+<form method="POST" enctype="multipart/form-data" action="{% url 'editprofile'%}">
+    {% csrf_token %}
+    <label for="name">Username:</label>
+    <input value="{{user.username}}" type="text" id="name" name="username" required><br><br>
+
+    <label for="profile_picture">Profile Picture:</label>
+    <input type="file" id="profile_picture" name="profile_picture" required><br><br>
+
+    <button type="submit">Upload</button>
+</form>
+{% endblock %}
