@@ -1,12 +1,17 @@
 {% extends "base.html"%}
 {% block content %}
+{% for message in messages%}
+<div  role="alert"{% if messages.success %} class="alert alert-success" {%else%} class="alert alert-danger" {% endif %}>
+    {{message}}
+  </div>
+  {% endfor %}
 <form method="POST" enctype="multipart/form-data" action="{% url 'editprofile'%}">
     {% csrf_token %}
     <label for="name">Username:</label>
     <input value="{{user.username}}" type="text" id="name" name="username" required><br><br>
 
     <label for="profile_picture">Profile Picture:</label>
-    <input type="file" id="profile_picture" name="profile_picture" required><br><br>
+    <input type="file" id="profile_picture" name="profile_picture"><br><br>
 
     <button type="submit">Upload</button>
 </form>

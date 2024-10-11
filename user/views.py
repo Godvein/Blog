@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from .models import profile as user_profile
 # Create your views here.
 def register(request):
     if request.method == "POST":
@@ -48,4 +49,22 @@ def profile(request):
     return render(request, "profile.html")
 
 def editprofile(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        profile_picture = request.FILES.get("profile_picture")
+        user = User.objects.get(id = request.user.id)
+        profile = user_profile.objects.get(user = user)
+
+        #check if image is provided
+        if profile_picture:
+            profile.image = profile_picture
+        profile.save()
+        if User.objects.filter(username=username).exists() and request.user.username != username:
+            messages.error(request, "Username already exists.")
+            return redirect("editprofile")
+        user.username = username
+        user.save()
+        messages.success(request, "successfully updated profile")
+        return redirect("profile")
+        
     return render(request, "editprofile.html")
