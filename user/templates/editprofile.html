@@ -1,4 +1,4 @@
-{% extends "base.html"%}
+{% extends "blogmain/base.html"%}
 {% block content %}
 {% for message in messages%}
 <div  role="alert"{% if messages.success %} class="alert alert-success" {%else%} class="alert alert-danger" {% endif %}>

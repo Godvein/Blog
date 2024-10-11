@@ -1,0 +1,27 @@
+{% extends "blogmain/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="col-md-8 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <img src="{{ object.user.profile.image.url }}" alt="Profile Picture" class="rounded-circle img-fluid mb-3" style="width: 150px;">
+               {% if request.user == blogs.user%}
+                <div class="mb-3">
+                    <a href="{%url 'updatepost' blogs.id%}" class="btn btn-warning me-2">Update</a>
+                    <a href="{% url 'deletepost' blogs.id%}" class="btn btn-danger">Delete</a>
+                {% endif %}
+                </div>
+                <h5 class="card-title">{{ object.title }}</h5>
+                <p class="card-text">by <strong>{{ object.user.username }}</strong></p>
+                <p class="card-text text-muted">{{ object.date_created }}</p>
+                
+                <hr>
+                <div class="post-content">
+                    <p>{{ object.post|linebreaks }}</p> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

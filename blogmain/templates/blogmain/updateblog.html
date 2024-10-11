@@ -1,0 +1,23 @@
+{% extends "blogmain/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Create a New Post</h2>
+
+    <form method="post" action="{% url 'updatepost' blog.id%}">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="titleInput" class="form-label">Title</label>
+            <input value="{{blog.title}}" name="title" type="text" class="form-control" id="titleInput" placeholder="Enter your post title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="postContent" class="form-label">Post Content</label>
+            <textarea name="content" class="form-control" id="postContent" rows="5" placeholder="What's on your mind?" required>{{blog.post}}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+{% endblock %}
