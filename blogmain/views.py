@@ -1,4 +1,5 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import blogs
 from django.contrib.auth.models import User
 from django.views.generic import ListView,DetailView
@@ -11,9 +12,22 @@ class blogList(ListView):
     ordering = ["-date_created"]
     paginate_by = 6
     
+
+class userblogList(ListView):
+    model = blogs
+    template_name = "blogmain/user_post.html"
+    context_object_name = 'post'
+    paginate_by = 6
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username = self.kwargs.get("username"))
+        return blogs.objects.filter(user = user).order_by("-date_created")
+    
+    
 class blogDetail(DetailView):
     model = blogs
 
+@login_required(login_url="/login/")
 def createblog(request):
     if request.method == "POST":
         user = User.objects.get(id = request.user.id)

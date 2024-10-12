@@ -13,7 +13,7 @@
                 {% endif %}
                 </div>
                 <h5 class="card-title">{{ object.title }}</h5>
-                <p class="card-text">by <strong>{{ object.user.username }}</strong></p>
+                <p class="card-text">by <strong><a href="{% url 'userbloglist' object.user.username%}">{{ object.user.username }}</a></strong></p>
                 <p class="card-text text-muted">{{ object.date_created }}</p>
                 
                 <hr>

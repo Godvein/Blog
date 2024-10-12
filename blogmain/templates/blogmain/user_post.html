@@ -1,23 +1,11 @@
 {% extends "blogmain/base.html" %}
 
 {% block content %}
-<div class="container mt-4">
-    <ul class="messages">
-        {% for message in messages %}
-        <div role="alert" class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ message }}
-        </div>
-        {% endfor %}
-    </ul>
 
-    
-    <div class="mb-4">
-        <a href="{% url 'createpost'%}" class="btn btn-success btn-lg" style="width: 100%;">
-            What's on your mind?
-        </a>
-    </div>
+
 
     <div class="row">
+        <h1 class="mb-3"> Post by {{ view.kwargs.username}} ({{page_obj.paginator.count}})</h1>
         {% for p in post %}
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm">
