@@ -9,6 +9,7 @@ class blogList(ListView):
     template_name = "blogmain/home.html"
     context_object_name = 'post'
     ordering = ["-date_created"]
+    paginate_by = 6
     
 class blogDetail(DetailView):
     model = blogs
