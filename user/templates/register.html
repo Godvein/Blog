@@ -1,6 +1,13 @@
 {% extends "blogmain/base.html" %}
 {% block content %}
-<form method="post" action="{%url 'register'%}"> {% csrf_token %}
+<ul class="messages">
+    {% for message in messages %}
+    <div  class="alert alert-danger" >
+        {{message}}
+      </div>
+    {% endfor %}
+</ul>
+<form method="post" action="{% url 'register' %}"> {% csrf_token %}
     <div class="mb-3">
         <label for="usernameInput" class="form-label">Username</label>
         <input name="username" type="text" class="form-control" id="usernameInput" aria-describedby="usernameHelp" required>
@@ -14,9 +21,16 @@
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
         <input name="password" type="password" class="form-control" id="exampleInputPassword1" required>
+        <div id="passwordHelp" class="form-text">
+            Password must be at least 6 characters long, include one uppercase letter and at least one digit
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
+        <input name="password_confirm" type="password" class="form-control" id="exampleInputPassword2" required>
     </div>
     <button type="submit" class="btn btn-primary">Sign Up</button>
-    <p>already have an account?</p>
-    <a href="{%url 'login'%}">sign in</a>
+    <p>Already have an account?</p>
+    <a href="{% url 'login' %}">Sign in</a>
 </form>
 {% endblock %}

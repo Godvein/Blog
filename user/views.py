@@ -3,12 +3,14 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from .models import profile as user_profile
+import re
 # Create your views here.
 def register(request):
     if request.method == "POST":
         username = request.POST.get("username")
         email = request.POST.get("email")
         password = request.POST.get("password")
+        passwordconfirm = request.POST.get("password_confirm")
 
         # Check if username already exists
         if User.objects.filter(username=username).exists():
@@ -20,7 +22,14 @@ def register(request):
             messages.error(request, "Email already exists.")
             return render(request, "register.html")
         
-
+        if password != passwordconfirm:
+            messages.error(request, "password doesnt match")
+            return render(request, "register.html")
+        
+        if len(password) < 6 or not re.search(r'[A-Z]', password) or not re.search(r'\d', password):
+            messages.error(request, "Password must be at least 6 characters long and contain at least one uppercase letter and one digit.")
+            return render(request, "register.html")
+        
         user = User.objects.create_user(username= username, email= email, password= password)
         user.save()
         messages.success(request, "account was created successfully please login")
