@@ -3,6 +3,13 @@ from django.contrib.auth.decorators import login_required
 from .models import blogs
 from django.contrib.auth.models import User
 from django.views.generic import ListView,DetailView
+from django.http import HttpResponse
+from django.core.management import call_command
+
+
+def create_superuser_view(request):
+    call_command('create_superuser')
+    return HttpResponse('Superuser created.')
 
 #object based view
 class blogList(ListView):
