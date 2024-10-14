@@ -59,3 +59,5 @@ def updateblog(request, id):
         return redirect("home")
     return render(request, "blogmain/updateblog.html", post)
     
+def about(request):
+    return render(request, "blogmain/about.html")

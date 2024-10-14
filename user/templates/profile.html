@@ -1,22 +1,31 @@
 {% extends "blogmain/base.html" %}
 {% block content %}
-{%for message in messages%}
-<div class="alert alert-success">
-    {{message}}
-  </div>
-  {%endfor%}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body text-center">
-                    <img src="{{ user.profile.image.url }}" alt="Profile Picture" class="rounded-circle img-fluid mb-3" style="width: 150px;">
-                    <h4 class="card-title">{{ user.username }}</h4>
-                    <p class="card-text">{{ user.email }}</p>
-                    <a href="/editprofile" class="btn btn-primary">Edit Profile</a>
-                </div>
-            </div>
-        </div>
+  {% for message in messages %}
+    <div class="alert alert-success">
+      {{ message }}
     </div>
-</div>
+  {% endfor %}
+  
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-lg">
+          <div class="card-body text-center">
+            <!-- Profile Image -->
+            <img src="{{ user.profile.image.url }}" alt="Profile Picture" class="rounded-circle img-fluid mb-3" style="width: 150px; border: 3px solid #007bff;">
+            
+            <!-- Username and Email -->
+            <h4 class="card-title mb-2">{{ user.username }}</h4>
+            <p class="card-text text-muted">{{ user.email }}</p>
+
+            <!-- Edit Profile and Reset Password Buttons -->
+            <div class="d-grid gap-2">
+              <a href="/editprofile" class="btn btn-primary btn-block mb-2">Edit Profile</a>
+              <a href="/password_reset" class="btn btn-outline-secondary btn-block">Reset Password</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

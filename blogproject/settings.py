@@ -76,6 +76,10 @@ WSGI_APPLICATION = 'blogproject.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+      #'default': {
+       #     'ENGINE': 'django.db.backends.sqlite3',
+        #    'NAME': BASE_DIR / 'db.sqlite3',
+        #}
 }
 
 # Password validation
@@ -125,6 +129,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "ankitb1011logs@gmail.com"  # Your Gmail address
-EMAIL_HOST_PASSWORD = "kwoz yjqp mgjl mbvf"  # Your Gmail password
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_USER")  
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
